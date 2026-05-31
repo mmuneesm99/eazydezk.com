@@ -64,11 +64,21 @@ body{font-family:'Inter',sans-serif;background:var(--white);color:var(--gray-900
 .btn-nav-ghost:hover{background:var(--gray-100)}
 .btn-nav-primary{font-size:.875rem;font-weight:600;color:white;background:var(--brand);border:none;cursor:pointer;padding:.45rem 1.1rem;border-radius:var(--r8);transition:background .15s,transform .1s;text-decoration:none;font-family:'Inter',sans-serif}
 .btn-nav-primary:hover{background:var(--brand-dark);transform:translateY(-1px)}
-.burger{display:none;flex-direction:column;gap:4.5px;background:none;border:none;cursor:pointer;padding:6px}
+.burger{display:none;flex-direction:column;gap:4.5px;background:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.32);border-radius:var(--r8);cursor:pointer;padding:8px;box-shadow:0 8px 24px rgba(15,23,42,.08)}
 .burger span{display:block;width:20px;height:1.5px;background:var(--gray-700);border-radius:2px;transition:all .22s}
-.m-menu{display:none;position:fixed;top:var(--nav-h);left:0;right:0;background:white;border-bottom:1px solid var(--gray-200);z-index:199;padding:1.25rem 1.5rem 2rem;flex-direction:column;gap:1rem;box-shadow:var(--shadow-lg)}
-.m-menu.open{display:flex}
-.m-menu a{font-size:.9rem;font-weight:500;color:var(--gray-700);text-decoration:none}
+.m-menu{position:fixed;top:var(--nav-h);left:12px;right:12px;z-index:199;display:flex;flex-direction:column;gap:.55rem;padding:.85rem;background:linear-gradient(145deg,rgba(3,7,18,.96),rgba(15,23,42,.92));border:1px solid rgba(255,255,255,.1);border-radius:var(--r16);box-shadow:0 26px 70px rgba(0,0,0,.36);backdrop-filter:blur(18px);opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-16px) scale(.98);transform-origin:top center;transition:opacity .24s ease,transform .24s ease,visibility .24s ease}
+.m-menu::before{content:'';position:absolute;inset:0;border-radius:inherit;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:38px 38px;mask-image:linear-gradient(black,transparent 95%);pointer-events:none}
+.m-menu.open{opacity:1;visibility:visible;pointer-events:auto;transform:none}
+.m-menu a{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;min-height:46px;padding:.8rem .95rem;border-radius:var(--r10,var(--r8));font-size:.92rem;font-weight:650;color:rgba(255,255,255,.82);text-decoration:none;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);opacity:0;transform:translateY(-8px);transition:background .18s ease,border-color .18s ease,color .18s ease,transform .18s ease}
+.m-menu a::after{content:'›';font-size:1.2rem;color:rgba(147,197,253,.7);line-height:1}
+.m-menu a:hover{background:rgba(255,255,255,.08);border-color:rgba(147,197,253,.2);color:white;transform:translateX(2px)}
+.m-menu.open a{animation:menuItemIn .32s ease forwards}
+.m-menu.open a:nth-child(2){animation-delay:.04s}
+.m-menu.open a:nth-child(3){animation-delay:.08s}
+.m-menu.open a:nth-child(4){animation-delay:.12s}
+.m-menu .menu-cta{margin-top:.25rem;background:linear-gradient(135deg,var(--brand),var(--emerald-500));border-color:rgba(255,255,255,.18);color:white;box-shadow:0 14px 34px rgba(37,99,235,.32)}
+.m-menu .menu-cta::after{content:'→';color:white}
+@keyframes menuItemIn{to{opacity:1;transform:none}}
 @media(max-width:768px){.nav-links,.btn-nav-ghost,.btn-nav-primary{display:none}.burger{display:flex}}
 
 /* ── HERO ── */
@@ -238,33 +248,6 @@ h3.feat-name{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-siz
 .tc-name{font-size:.85rem;font-weight:600;color:var(--gray-900)}
 .tc-role{font-size:.75rem;color:var(--gray-400)}
 
-/* ── PRICING ── */
-.price-sec{background:white}
-.price-toggle{display:flex;align-items:center;justify-content:center;gap:.75rem;margin:1.5rem 0 3rem;font-size:.85rem;color:var(--gray-500)}
-.toggle{width:40px;height:22px;background:var(--brand);border-radius:50px;position:relative;cursor:pointer;transition:background .2s;border:none}
-.toggle-knob{position:absolute;top:3px;right:3px;width:16px;height:16px;background:white;border-radius:50%;transition:transform .2s;box-shadow:var(--shadow-sm)}
-.price-badge{font-size:.72rem;font-weight:600;color:var(--emerald-600);background:#dcfce7;padding:.2rem .5rem;border-radius:50px}
-.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.5rem;max-width:940px;margin:0 auto}
-.plan{border:1px solid var(--gray-200);border-radius:var(--r16);padding:2rem;background:white;transition:all .2s;position:relative}
-.plan:hover{box-shadow:var(--shadow-xl)}
-.plan.popular{border-color:var(--brand);box-shadow:0 0 0 1px var(--brand)}
-.pop-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--brand);color:white;font-size:.7rem;font-weight:600;padding:.25rem 1rem;border-radius:50px;white-space:nowrap;letter-spacing:.04em}
-.plan-tier{font-size:.78rem;font-weight:600;color:var(--gray-500);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.5rem}
-.plan-price{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:2.5rem;color:var(--gray-900);line-height:1;letter-spacing:-.04em}
-.plan-price span{font-size:.85rem;font-weight:400;color:var(--gray-400)}
-.plan-desc{font-size:.82rem;color:var(--gray-500);margin:.5rem 0 1.5rem;line-height:1.55}
-.plan-feats{list-style:none;display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.75rem}
-.plan-feats li{font-size:.855rem;color:var(--gray-700);display:flex;align-items:center;gap:.65rem}
-.feat-check{width:16px;height:16px;border-radius:50%;background:var(--blue-50);border:1px solid var(--blue-100);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.55rem;color:var(--brand)}
-.btn-plan{display:block;text-align:center;padding:.7rem 1rem;border-radius:var(--r8);font-size:.875rem;font-weight:600;text-decoration:none;transition:all .2s;cursor:pointer;border:none;font-family:'Inter',sans-serif}
-.btn-plan-outline{background:white;color:var(--gray-700);border:1.5px solid var(--gray-200)}
-.btn-plan-outline:hover{border-color:var(--gray-400);background:var(--gray-50)}
-.btn-plan-fill{background:var(--brand);color:white}
-.btn-plan-fill:hover{background:var(--brand-dark);transform:translateY(-1px);box-shadow:0 4px 12px rgba(37,99,235,.3)}
-.price-safe{display:flex;justify-content:center;gap:.75rem;flex-wrap:wrap;margin:-1.6rem auto 3rem;max-width:800px}
-.safe-pill{display:inline-flex;align-items:center;gap:.45rem;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:50px;padding:.42rem .75rem;font-size:.78rem;font-weight:600;color:var(--gray-600)}
-.safe-pill span{color:var(--emerald-600)}
-
 /* ── COMPARISON ── */
 .compare-sec{background:var(--gray-50);border-top:1px solid var(--gray-200);border-bottom:1px solid var(--gray-200)}
 .compare-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:3rem}
@@ -320,12 +303,10 @@ footer{background:#0a0a0f;padding:4rem 24px 2rem;color:rgba(255,255,255,.35)}
       <li><a href="#features">Features</a></li>
       <li><a href="#product">Product</a></li>
       <li><a href="#roadmap">Roadmap</a></li>
-      <li><a href="#pricing">Pricing</a></li>
       <li><a href="#">Docs</a></li>
     </ul>
     <div class="nav-right">
-      <a class="btn-nav-ghost" href="#">Log in</a>
-      <a class="btn-nav-primary" href="#pricing">Start free trial</a>
+      <a class="btn-nav-primary" href="mailto:contact@tovance.com?subject=EazyDezk%20Demo%20Request">Request demo</a>
     </div>
     <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -336,8 +317,7 @@ footer{background:#0a0a0f;padding:4rem 24px 2rem;color:rgba(255,255,255,.35)}
   <a href="#features">Features</a>
   <a href="#product">Product</a>
   <a href="#roadmap">Roadmap</a>
-  <a href="#pricing">Pricing</a>
-  <a href="#" style="color:var(--brand);font-weight:600">Start free trial →</a>
+  <a class="menu-cta" href="mailto:contact@tovance.com?subject=EazyDezk%20Demo%20Request">Request demo</a>
 </div>
 
 <!-- HERO -->
@@ -362,8 +342,8 @@ footer{background:#0a0a0f;padding:4rem 24px 2rem;color:rgba(255,255,255,.35)}
     </p>
 
     <div class="hero-ctas rv" style="--d:.24s">
-      <a class="btn-hero-primary" href="#pricing">
-        Start free trial
+      <a class="btn-hero-primary" href="mailto:contact@tovance.com?subject=EazyDezk%20Demo%20Request">
+        Request demo
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M7.5 4l3.5 3-3.5 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
       <a class="btn-hero-ghost" href="#product">
@@ -728,79 +708,13 @@ footer{background:#0a0a0f;padding:4rem 24px 2rem;color:rgba(255,255,255,.35)}
   </div>
 </section>
 
-<!-- PRICING -->
-<section class="price-sec" id="pricing" aria-labelledby="ph">
-  <div class="s-wrap">
-    <div class="s-center">
-      <p class="kicker rv">Pricing</p>
-      <h2 class="s-title rv" id="ph">Simple, transparent pricing</h2>
-      <p class="s-desc rv">Start free. No credit card required. Upgrade when you're ready.</p>
-      <div class="price-toggle rv" style="--d:.1s">
-        <span>Monthly</span>
-        <button class="toggle" aria-label="Toggle annual billing"><span class="toggle-knob"></span></button>
-        <span>Annual <span class="price-badge">Save 20%</span></span>
-      </div>
-      <div class="price-safe rv" style="--d:.16s" aria-label="Pricing reassurance">
-        <span class="safe-pill"><span>✓</span>No setup fee</span>
-        <span class="safe-pill"><span>✓</span>Cancel anytime</span>
-        <span class="safe-pill"><span>✓</span>Includes GST invoices</span>
-        <span class="safe-pill"><span>✓</span>Support on WhatsApp</span>
-      </div>
-    </div>
-    <div class="plans">
-      <div class="plan rv">
-        <div class="plan-tier">Starter</div>
-        <div class="plan-price">Free<span> / forever</span></div>
-        <p class="plan-desc">For solo operators just getting started with digital billing.</p>
-        <ul class="plan-feats">
-          <li><span class="feat-check" aria-hidden="true">✓</span>50 invoices per month</li>
-          <li><span class="feat-check" aria-hidden="true">✓</span>Basic CRM — 100 contacts</li>
-          <li><span class="feat-check" aria-hidden="true">✓</span>1 user seat</li>
-          <li><span class="feat-check" aria-hidden="true">✓</span>PDF invoice sharing</li>
-          <li><span class="feat-check" aria-hidden="true">✓</span>Basic reports</li>
-        </ul>
-        <a class="btn-plan btn-plan-outline" href="#">Get started free</a>
-      </div>
-      <div class="plan popular rv" style="--d:.1s">
-        <span class="pop-badge">MOST POPULAR</span>
-        <div class="plan-tier">Growth</div>
-        <div class="plan-price">₹999<span> / month</span></div>
-        <p class="plan-desc">For growing teams managing deals, inventory, and multiple customers.</p>
-        <ul class="plan-feats">
-          <li><span class="feat-check" aria-hidden="true">✓</span>Unlimited invoices</li>
-          <li><span class="feat-check" aria-hidden="true">✓</span>Full CRM + pipeline</li>
-          <li><span class="feat-check" aria-hidden="true">✓</span>5 user seats</li>
-          <li><span class="feat-check" aria-hidden="true">✓</span>Inventory management</li>
-          <li><span class="feat-check" aria-hidden="true">✓</span>Expense tracking</li>
-          <li><span class="feat-check" aria-hidden="true">✓</span>Advanced reports + export</li>
-        </ul>
-        <a class="btn-plan btn-plan-fill" href="#">Start 14-day trial</a>
-      </div>
-      <div class="plan rv" style="--d:.2s">
-        <div class="plan-tier">Business</div>
-        <div class="plan-price">₹2,499<span> / month</span></div>
-        <p class="plan-desc">For established businesses with large teams and multiple branches.</p>
-        <ul class="plan-feats">
-          <li><span class="feat-check" aria-hidden="true">✓</span>Everything in Growth</li>
-          <li><span class="feat-check" aria-hidden="true">✓</span>Unlimited user seats</li>
-          <li><span class="feat-check" aria-hidden="true">✓</span>Multi-branch support</li>
-          <li><span class="feat-check" aria-hidden="true">✓</span>API access</li>
-          <li><span class="feat-check" aria-hidden="true">✓</span>Priority support (SLA)</li>
-          <li><span class="feat-check" aria-hidden="true">✓</span>Custom branding</li>
-        </ul>
-        <a class="btn-plan btn-plan-outline" href="#">Contact sales</a>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- CTA -->
 <section class="cta-sec" id="cta" aria-labelledby="ctah">
-  <h2 class="rv" id="ctah">Start your free trial today.<br>No credit card needed.</h2>
-  <p class="rv" style="--d:.1s">Join hundreds of growing teams already running smarter on EazyDezk.</p>
+  <h2 class="rv" id="ctah">Bring your billing and CRM<br>into one clean workspace.</h2>
+  <p class="rv" style="--d:.1s">Talk to the team about early access, onboarding, and the right setup for your business at contact@tovance.com.</p>
   <div class="cta-btns rv" style="--d:.2s">
-    <a class="btn-hero-primary" href="#pricing">Start for free</a>
-    <a class="btn-hero-ghost" href="#">Talk to sales</a>
+    <a class="btn-hero-primary" href="mailto:contact@tovance.com?subject=EazyDezk%20Demo%20Request">Request demo</a>
+    <a class="btn-hero-ghost" href="mailto:contact@tovance.com?subject=EazyDezk%20Sales%20Enquiry">Talk to sales</a>
   </div>
 </section>
 
@@ -823,7 +737,7 @@ footer{background:#0a0a0f;padding:4rem 24px 2rem;color:rgba(255,255,255,.35)}
           <li><a href="#features">Features</a></li>
           <li><a href="#product">Screenshots</a></li>
           <li><a href="#roadmap">Roadmap</a></li>
-          <li><a href="#pricing">Pricing</a></li>
+          
           <li><a href="#">Changelog</a></li>
         </ul>
       </nav>
@@ -833,7 +747,7 @@ footer{background:#0a0a0f;padding:4rem 24px 2rem;color:rgba(255,255,255,.35)}
           <li><a href="#">About</a></li>
           <li><a href="#">Blog</a></li>
           <li><a href="#">Careers</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><a href="mailto:contact@tovance.com?subject=EazyDezk%20Contact">Contact</a></li>
         </ul>
       </nav>
       <nav class="f-col" aria-label="Legal">
